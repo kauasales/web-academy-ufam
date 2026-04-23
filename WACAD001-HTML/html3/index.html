@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Semântico HTML5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        header, nav, main, aside, article, figure, p, section, footer {
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header {
+            background-color: #ff7e8e; 
+            min-height: 60px;
+        }
+
+        nav {
+            background-color: #50e3a4; 
+        }
+
+
+        .content-wrapper {
+            display: flex;
+            gap: 10px;
+            min-height: 400px;
+        }
+
+        aside {
+            background-color: #fcd2d7; 
+            flex: 1;
+        }
+
+        main {
+            background-color: #ccefff; 
+            flex: 2;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        article {
+            background-color: #70d9ff;
+            width: 90%;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        figure {
+            background-color: #fff1ad; 
+            width: 80%;
+            margin: 0;
+        }
+
+        p {
+            background-color: #e6ffad; 
+            width: 80%;
+            margin: 0;
+        }
+
+        section {
+            background-color: #00aaff; 
+            width: 90%;
+            color: black;
+        }
+
+        footer {
+            background-color: #b380ff; 
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>&lt;header&gt;</header>
+
+    <nav>&lt;nav&gt;</nav>
+
+    <div class="content-wrapper">
+        <aside>&lt;aside&gt;</aside>
+
+        <main>
+            &lt;main&gt;
+            <article>
+                &lt;article&gt;
+                <figure>&lt;figure&gt;</figure>
+                <p>&lt;p&gt;</p>
+            </article>
+
+            <section>&lt;section&gt;</section>
+        </main>
+    </div>
+
+    <footer>&lt;footer&gt;</footer>
+
+</body>
+</html>
