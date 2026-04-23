@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Contato - IComp</title>
+    <style>
+        body {
+            font-family: serif;
+            max-width: 600px;
+            margin: 20px;
+        }
+        fieldset {
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+        }
+        legend {
+            font-weight: normal;
+        }
+        .campo-linha {
+            margin-bottom: 8px;
+        }
+        label {
+            display: inline-block;
+            width: 120px;
+        }
+        .checkbox-group label {
+            width: auto;
+            margin-right: 10px;
+        }
+        textarea {
+            width: 95%;
+            height: 100px;
+        }
+        .botoes {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Formulário de Contato</h1>
+    <p>Por favor, preencha o formulário abaixo e clique no botão Enviar Mensagem. Agradecemos por seu contato.</p>
+
+    <form action="#" method="post" enctype="multipart/form-data">
+        
+        <fieldset>
+            <legend>Dados Básicos</legend>
+            <div class="campo-linha">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" size="40">
+            </div>
+            <div class="campo-linha">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seuome@dominio.com.br" size="60">
+            </div>
+            <div class="campo-linha">
+                <label for="website">Website</label>
+                <input type="url" id="website" name="website" value="http://" size="40">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Seu curso no Instituto de Computação</legend>
+            <input type="radio" id="ciencia" name="curso" value="ciencia">
+            <label for="ciencia" style="width: auto;">Ciência da Computação</label><br>
+            <input type="radio" id="sistemas" name="curso" value="sistemas">
+            <label for="sistemas" style="width: auto;">Sistemas de Informação</label><br>
+            <input type="radio" id="engenharia" name="curso" value="engenharia">
+            <label for="engenharia" style="width: auto;">Engenharia da Computação</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Assinale as linguagens já usadas por você:</legend>
+            <div class="checkbox-group">
+                Java <input type="checkbox" name="lang" value="java">
+                C <input type="checkbox" name="lang" value="c">
+                C++ <input type="checkbox" name="lang" value="cpp">
+                Perl <input type="checkbox" name="lang" value="perl">
+                Python <input type="checkbox" name="lang" value="python">
+                Javascript <input type="checkbox" name="lang" value="js">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Dados Complementares</legend>
+            <div class="campo-linha">
+                <label for="cor">Cor Favorita</label>
+                <input type="color" id="cor" name="cor" value="#000000">
+            </div>
+            <div class="campo-linha">
+                <label for="nascimento">Data de Nascimento</label>
+                <input type="date" id="nascimento" name="nascimento">
+            </div>
+            <div class="campo-linha">
+                <label for="ano_entrada" style="width: auto;">Ano de Entrada em seu Curso do IComp</label>
+                <input type="number" id="ano_entrada" name="ano_entrada" value="2000">
+            </div>
+            <div class="campo-linha">
+                <label for="nota" style="width: auto;">Nota para este site</label>
+                <input type="range" id="nota" name="nota" min="0" max="10">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Área de atuação</legend>
+            <select name="area" id="area">
+                <option value="banco_dados">Banco de Dados</option>
+                <option value="redes">Redes</option>
+                <option value="ia">Inteligência Artificial</option>
+                <option value="engenharia_sw">Engenharia de Software</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Submeta seu currículo vitae</legend>
+            <input type="file" name="curriculo">
+        </fieldset>
+
+        <fieldset>
+            <legend>Digite sua Mensagem</legend>
+            <textarea name="mensagem">Este é o valor padrão!</textarea>
+        </fieldset>
+
+        <div class="botoes">
+            <input type="reset" value="Resetar Dados">
+            <input type="submit" value="Enviar Mensagem">
+        </div>
+
+    </form>
+</body>
+</html>
