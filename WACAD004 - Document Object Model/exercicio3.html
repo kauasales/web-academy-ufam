@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Tarefas</title>
+  </head>
+  <body>
+    <div id="organizador">
+      <h3>Tarefas Pendentes:</h3>
+      <ul id="lista-pendentes">
+        <li id="tarefa-carro">Lavar o carro</li>
+        <li id="tarefa-js">Estudar JavaScript</li>
+        <li id="tarefa-livro">Ler livro</li>
+        <li id="tarefa-roupas">Dobrar as roupas</li>
+      </ul>
+
+      <h3>Tarefas Concluídas:</h3>
+      <ul id="lista-concluidas">
+        <li>Fazer compras</li>
+      </ul>
+    </div>
+
+    <script>
+      const tarefaCarro = document.getElementById('tarefa-carro');
+      tarefaCarro.remove();
+
+      const tarefaJS = document.getElementById('tarefa-js');
+      const listaConcluidas = document.getElementById('lista-concluidas');
+      listaConcluidas.appendChild(tarefaJS);
+
+      const listaPendentes = document.getElementById('lista-pendentes');
+      const novaTarefa = document.createElement('li');
+      novaTarefa.textContent = 'Fazer exercícios';
+      listaPendentes.appendChild(novaTarefa);
+
+      const tarefaLivro = document.getElementById('tarefa-livro');
+      const textoOriginal = tarefaLivro.textContent;
+      tarefaLivro.textContent = '[URGENTE] ' + textoOriginal;
+
+      console.log('Alterações realizadas');
+      console.log('1. Tarefa "Lavar o carro" foi removida');
+      console.log('2. Tarefa "Estudar JavaScript" movida para concluídas');
+      console.log('3. Nova tarefa "Fazer exercícios" adicionada às pendentes');
+      console.log('4. Texto "[URGENTE]" adicionado ao início da tarefa "Ler livro"');
+      
+      console.log('\nLista pendentes atual');
+      const itensPendentes = document.querySelectorAll('#lista-pendentes li');
+      itensPendentes.forEach((item, index) => {
+        console.log(`${index + 1}. ${item.textContent}`);
+      });
+      
+      console.log('\nLista concluídas atual');
+      const itensConcluidas = document.querySelectorAll('#lista-concluidas li');
+      itensConcluidas.forEach((item, index) => {
+        console.log(`${index + 1}. ${item.textContent}`);
+      });
+    </script>
+  </body>
+</html>

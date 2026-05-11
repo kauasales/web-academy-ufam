@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        #app-tarefas {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        input {
+            width: 60%;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: white;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="app-tarefas">
+    <h3>Minhas Tarefas</h3>
+    
+    <!-- Campo de digitação e botão de ação -->
+    <input type="text" id="input-nova-tarefa" placeholder="Digite uma tarefa...">
+    <button id="btn-adicionar">Adicionar Tarefa</button>
+
+    <!-- Lista onde as tarefas vão aparecer -->
+    <ul id="lista-tarefas">
+        <li>Revisar código da aula passada</li>
+    </ul>
+    </div>
+
+    <script>
+        const inputTarefa = document.getElementById('input-nova-tarefa');
+        const botaoAdicionar = document.getElementById('btn-adicionar');
+        const listaTarefas = document.getElementById('lista-tarefas');
+
+        botaoAdicionar.addEventListener('click', function() {
+            const textoDigitado = inputTarefa.value;
+            
+            if (textoDigitado.trim() === '') {
+                alert('Por favor, digite uma tarefa antes de adicionar!');
+                return; 
+            }
+            
+            const novaLi = document.createElement('li');
+            novaLi.innerText = textoDigitado;
+            
+            listaTarefas.appendChild(novaLi);
+            
+            inputTarefa.value = '';
+            
+            inputTarefa.focus();
+        });
+
+        inputTarefa.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                botaoAdicionar.click();
+            }
+        });
+
+        console.log('To-Do List carregada! Adicione suas tarefas :)');
+    </script>
+</body>
+</html>
