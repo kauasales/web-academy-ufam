@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon servidor.js C:\\Users\\Aluno\\Downloads",
-    "start:prod": "node servidor.js C:\\Users\\Aluno\\Downloads"
-
+    "start:prod": "SET NODE_ENV=production& node servidor.js C:\\Users\\Aluno\\Downloads"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +14,8 @@
   "type": "commonjs",
   "devDependencies": {
     "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }

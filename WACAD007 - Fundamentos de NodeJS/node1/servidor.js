@@ -1,8 +1,10 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
-const PORT = process.env.PORT || 3000;
 
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
+
+const PORT = process.env.PORT;
 const diretorioAlvo = process.argv[2] || '.';
 
 const server = http.createServer((req, res) => {
@@ -28,6 +30,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:3000`);
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
   console.log(`Listando o diretório: ${path.resolve(diretorioAlvo)}`);
 });
