@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineList Admin</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">CineList Admin</a>
+            
+            <div class="ms-auto d-flex align-items-center">
+                <button class="btn btn-link nav-link text-light me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral" aria-controls="menuLateral">
+                    Menu
+                </button>
+                <a class="nav-link text-light-50" href="#">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="menuLateral" aria-labelledby="menuLateralLabel">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title fw-bold" id="menuLateralLabel">CineList</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0 pt-3">
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action">Dashboard</a>
+                <a href="#" class="list-group-item list-group-item-action active">Catálogo de Filmes</a>
+                <a href="#" class="list-group-item list-group-item-action">Gerenciar Usuários</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 100px;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-normal">Gerenciar Catálogo</h2>
+            <button class="btn btn-primary px-4 py-2" type="button" data-bs-toggle="modal" data-bs-target="#modalCadastroFilme">
+                Adicionar Filme
+            </button>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="px-3" style="width: 8%;">ID</th>
+                            <th scope="col" style="width: 40%;">Título</th>
+                            <th scope="col" style="width: 20%;">Gênero</th>
+                            <th scope="col" style="width: 15%;">Status</th>
+                            <th scope="col" class="text-center" style="width: 17%;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-3 text-muted">01</td>
+                            <td class="fw-semibold text-secondary">O Senhor dos Anéis</td>
+                            <td class="text-secondary">Fantasia</td>
+                            <td><span class="badge badge-assistido rounded-pill px-3 py-1">Assistido</span></td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-outline-primary me-1">Editar</button>
+                                <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 text-muted">02</td>
+                            <td class="fw-semibold text-secondary">Interestelar</td>
+                            <td class="text-secondary">Ficção Científica</td>
+                            <td><span class="badge badge-pendente rounded-pill px-3 py-1">Pendente</span></td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-outline-primary me-1">Editar</button>
+                                <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCadastroFilme" tabindex="-1" aria-labelledby="modalCadastroFilmeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="modalCadastroFilmeLabel">Cadastrar Novo Filme</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="formFilme">
+                        <div class="mb-3">
+                            <label for="nomeFilme" class="form-label fw-medium">Nome do Filme</label>
+                            <input type="text" class="form-control" id="nomeFilme" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoriaFilme" class="form-label fw-medium">Categoria / Gênero</label>
+                            <select class="form-select" id="categoriaFilme" required>
+                                <option value="" selected disabled>Selecione...</option>
+                                <option value="Ação">Ação</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Fantasia">Fantasia</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="formFilme" class="btn btn-primary">Salvar Filme</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
