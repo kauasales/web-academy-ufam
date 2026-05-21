@@ -1,6 +1,7 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
+const { createLink } = require('./util');
 
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
 
@@ -16,14 +17,27 @@ const server = http.createServer((req, res) => {
       return;
     }
 
-    let html = `<h1>Conteúdo de: ${path.resolve(diretorioAlvo)}</h1><ul>`;
-
-    arquivos.forEach(arquivo => {
-      const tipo = arquivo.isDirectory() ? '[DIR]' : '[ARQ]';
-      html += `<li>${tipo} ${arquivo.name}</li>`;
-    });
-
-    html += '</ul>';
+    let html = `<h1>Conteúdo de: ${path.resolve(diretorioAlvo)}</h1>`;
+    
+    // Separando diretórios e arquivos
+    const diretorios = arquivos.filter(arquivo => arquivo.isDirectory());
+    const arquivosLista = arquivos.filter(arquivo => !arquivo.isDirectory());
+    
+    // Primeiro lista os diretórios
+    if (diretorios.length > 0) {
+      html += `<h2>Diretórios</h2>`;
+      diretorios.forEach(dir => {
+        html += createLink(dir.name, true);
+      });
+    }
+    
+    // Depois lista os arquivos
+    if (arquivosLista.length > 0) {
+      html += `<h2>Arquivos</h2>`;
+      arquivosLista.forEach(arquivo => {
+        html += createLink(arquivo.name, false);
+      });
+    }
     
     res.end(html);
   });
