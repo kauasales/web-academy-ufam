@@ -1,0 +1,39 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.table th {
+    background-color: #1a1d20 !important;
+    color: white !important;
+}
+
+.badge-assistido {
+    background-color: #198754;
+    color: white;
+}
+
+.badge-pendente {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.offcanvas-body .list-group-item {
+    background-color: transparent;
+    color: #adbbc4;
+    border: none;
+    padding: 12px 20px;
+}
+
+.offcanvas-body .list-group-item:hover {
+    background-color: #2b3035;
+    color: #fff;
+}
+
+.offcanvas-body .list-group-item.active {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+}
