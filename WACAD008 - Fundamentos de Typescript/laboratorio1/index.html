@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Lembretes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1> Tarefas </h1>
+
+    <div id="tela-auth" class="card">
+      <h2>Acessar Sistema</h2>
+      <div class="form-group">
+        <label>Nome (apenas para cadastro)</label>
+        <input type="text" id="auth-nome" placeholder="Seu Nome">
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="auth-email" placeholder="exemplo@email.com" value="ana@email.com">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="auth-senha" placeholder="Sua senha" value="senha123">
+      </div>
+      <div class="botoes-container">
+        <button id="btn-login">Entrar</button>
+        <button id="btn-cadastrar" class="btn-secundario">Registrar</button>
+      </div>
+    </div>
+
+    <div id="tela-principal" class="card hidden">
+      <div class="user-info">
+        <span id="boas-vindas">Olá, Usuário</span>
+        <button id="btn-logout" class="btn-logout">Sair</button>
+      </div>
+
+      <h3>Criar Novo Lembrete</h3>
+      <div class="form-group">
+        <label>Título *</label>
+        <input type="text" id="lemb-titulo" placeholder="O que precisa fazer?">
+      </div>
+      <div class="form-group">
+        <label>Descrição (Opcional)</label>
+        <textarea id="lemb-descricao" rows="2" placeholder="Detalhes da atividade..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Data Limite (Opcional)</label>
+        <input type="datetime-local" id="lemb-data-limite">
+      </div>
+      <div class="botoes-remind-container">
+        <button id="btn-salvar-lembrete" data-modo="criar">Adicionar Lembrete</button>
+        <button id="btn-cancelar-edicao" class="btn-secundario hidden">Cancelar Edição</button>
+      </div>
+      <hr class="divisor">
+
+      <h3>Meus Lembretes</h3>
+      <div id="lista-lembretes">
+        </div>
+    </div>
+  </div>
+
+  <script type="module" src="dist/index.js"></script>
+</body>
+</html>
