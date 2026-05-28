@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatísticas da Turma - Ed. Física</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Turma de Educação Física</h1>
+
+        <div id="stats-display" class="card display-card">
+            <h2>Estatísticas da Turma: <span id="view-class-name">...</span></h2>
+            <div class="grid-stats">
+                <div class="stat-item"><strong>Total de Alunos:</strong> <span id="stat-total">0</span></div>
+                <div class="stat-item"><strong>Média de Idade:</strong> <span id="stat-age">0</span> anos</div>
+                <div class="stat-item"><strong>Média de Altura:</strong> <span id="stat-height">0</span> m</div>
+                <div class="stat-item"><strong>Média de Peso:</strong> <span id="stat-weight">0</span> kg</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 id="form-title">Adicionar Novo Aluno</h3>
+            <form id="student-form">
+                <input type="hidden" id="student-id-original">
+
+                <div class="form-group">
+                    <label for="student-id">ID (Matrícula):</label>
+                    <input type="number" id="student-id" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="student-name">Nome Completo:</label>
+                    <input type="text" id="student-name" required>
+                </div>
+                <div class="form-group row">
+                    <div>
+                        <label for="student-age">Idade:</label>
+                        <input type="number" id="student-age" required min="1">
+                    </div>
+                    <div>
+                        <label for="student-height">Altura (m):</label>
+                        <input type="number" id="student-height" step="0.01" required min="0.5">
+                    </div>
+                    <div>
+                        <label for="student-weight">Peso (kg):</label>
+                        <input type="number" id="student-weight" step="0.1" required min="1">
+                    </div>
+                </div>
+                <button type="submit" id="btn-save">Salvar Aluno</button>
+                <button type="button" id="btn-cancel" class="btn-secondary" style="display: none;">Cancelar Edição</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Alunos Matriculados</h3>
+            <table id="students-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Altura</th>
+                        <th>Peso</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="module" src="dist/index.js"></script>
+</body>
+</html>
