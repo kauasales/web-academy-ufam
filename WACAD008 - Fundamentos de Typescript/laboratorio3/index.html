@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Carrinho de Compras</h1>
+
+        <div id="cart-display" class="card display-card">
+            <h2>Resumo do Carrinho</h2>
+            <div class="grid-stats">
+                <div class="stat-item"><strong>Quantidade de Itens:</strong> <span id="stat-qty">0</span></div>
+                <div class="stat-item"><strong>Valor Total:</strong> <span id="stat-total">R$ 0.00</span></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            
+            <div class="card">
+                <h3>Inserir Produto no Carrinho</h3>
+                <form id="product-form">
+                    <div class="form-group">
+                        <label for="product-type">Tipo de Produto:</label>
+                        <select id="product-type" required>
+                            <option value="">-- Selecione --</option>
+                            <option value="tv">Televisão (TV)</option>
+                            <option value="cellphone">Celular</option>
+                            <option value="bicycle">Bicicleta</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-model">Modelo:</label>
+                        <input type="text" id="prod-model" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-manufacturer">Fabricante:</label>
+                        <input type="text" id="prod-manufacturer" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-price">Valor (R$):</label>
+                        <input type="number" id="prod-price" step="0.01" required min="0.01">
+                    </div>
+
+                    <div id="dynamic-fields"></div>
+
+                    <button type="submit" id="btn-add">Adicionar ao Carrinho</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>Itens no Carrinho</h3>
+                <table id="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Produto / Descrição</th>
+                            <th>Preço</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+
+        </div> </div>
+
+    <script type="module" src="dist/index.js"></script>
+</body>
+</html>
