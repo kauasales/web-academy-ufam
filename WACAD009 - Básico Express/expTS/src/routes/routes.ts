@@ -25,4 +25,34 @@ router.get('/lorem/:quantidade', (req: Request, res: Response) => {
   res.send(paragrafos.join('<br><br>'));
 });
 
+router.get('/hb1', (req: Request, res: Response) => {
+  res.render('hb1', {
+    mensagem: 'Olá, você está aprendendo Express + Handlebars!',
+    layout: false
+  });
+});
+
+router.get('/hb2', (req: Request, res: Response) => {
+  res.render('hb2', {
+    poweredByNodejs: true,
+    nome: 'Express',
+    tipo: 'Framework',
+    layout: false
+  });
+});
+
+router.get('/hb3', (req: Request, res: Response) => {
+  const professores = [
+    { nome: 'David Fernandes', sala: 1238 },
+    { nome: 'Horácio Fernandes', sala: 1233 },
+    { nome: 'Edleno Moura', sala: 1236 },
+    { nome: 'Elaine Harada', sala: 1231 }
+  ];
+
+  res.render('hb3', {
+    professores,
+    layout: false
+  });
+});
+
 export default router;
