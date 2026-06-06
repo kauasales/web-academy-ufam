@@ -13,6 +13,8 @@ const PORT = Number(process.env.PORT) || 3333;
 
 app.use(express.static(path.join(process.cwd(), 'src/public')));
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use(logger('completo'));
 
 app.use((req, res, next) => {

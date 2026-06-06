@@ -1,0 +1,34 @@
+<h1>Editar Produto</h1>
+
+<form action="/products/edit/{{product.id}}" method="POST">
+
+    <div class="mb-3">
+        <label>Nome</label>
+
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          value="{{product.name}}"
+          required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label>Preço</label>
+
+        <input
+          type="number"
+          step="0.01"
+          name="price"
+          class="form-control"
+          value="{{product.price}}"
+          required
+        >
+    </div>
+
+    <button class="btn btn-primary">
+      Atualizar
+    </button>
+
+</form>

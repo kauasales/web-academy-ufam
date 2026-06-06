@@ -1,0 +1,48 @@
+<h1>Produtos</h1>
+
+<a href="/products/create" class="btn btn-success mb-3">
+  Adicionar Produto
+</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each products}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>R$ {{price}}</td>
+
+            <td>
+                <a
+                  href="/products/edit/{{id}}"
+                  class="btn btn-warning btn-sm"
+                >
+                  Editar
+                </a>
+
+                <form
+                  action="/products/delete/{{id}}"
+                  method="POST"
+                  style="display:inline;"
+                >
+                    <button
+                      type="submit"
+                      class="btn btn-danger btn-sm"
+                    >
+                      Excluir
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
