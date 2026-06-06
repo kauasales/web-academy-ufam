@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "sass": "sass src/public/scss:src/public/css --watch"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-handlebars": "^9.0.1",
-    "lorem-ipsum": "^3.0.0"
+    "lorem-ipsum": "^3.0.0",
+    "sass": "^1.100.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
