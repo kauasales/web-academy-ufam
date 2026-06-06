@@ -12,18 +12,32 @@ const app = express();
 const PORT = Number(process.env.PORT) || 3333;
 
 app.use(express.static(path.join(process.cwd(), 'src/public')));
+
 app.use(logger('completo'));
+
+app.use((req, res, next) => {
+  res.locals.currentPath = req.path;
+  next();
+});
 
 app.engine(
   'handlebars',
   engine({
     helpers: {
-      nodeTechnologies: (technologies) => {
+      isActive: (currentPath: string, path: string) => {
+        return currentPath === path ? 'active' : '';
+      },
+
+      startsWith: (currentPath: string, prefix: string) => {
+        return currentPath.startsWith(prefix) ? 'active' : '';
+      },
+
+      nodeTechnologies: (technologies: Technology[]) => {
         let result = '<ul>';
 
         technologies
-          .filter((tech: Technology) => tech.poweredByNodejs)
-          .forEach((tech: Technology) => {
+          .filter((tech) => tech.poweredByNodejs)
+          .forEach((tech) => {
             result += `<li>${tech.name} (${tech.type})</li>`;
           });
 
@@ -32,11 +46,10 @@ app.engine(
         return result;
       },
     },
-  })
+  }),
 );
 
 app.set('view engine', 'handlebars');
-
 app.set('views', path.join(process.cwd(), 'src', 'views'));
 
 app.use(routes);

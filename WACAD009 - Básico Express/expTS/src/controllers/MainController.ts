@@ -2,8 +2,11 @@ import { Request, Response } from 'express';
 import { LoremIpsum } from 'lorem-ipsum';
 
 export default class MainController {
+
   static home(req: Request, res: Response): void {
-    res.send('<h1>Hello World!</h1>');
+    res.render('home', {
+      mensagem: 'Hello World'
+    })
   }
 
   static lorem(req: Request, res: Response): void {
@@ -21,7 +24,10 @@ export default class MainController {
       () => lorem.generateParagraphs(1),
     );
 
-    res.send(paragrafos.join('<br><br>'));
+    res.render('lorem', {
+      quantidade,
+      paragrafos,
+    });
   }
 
   static hb1(req: Request, res: Response): void {
