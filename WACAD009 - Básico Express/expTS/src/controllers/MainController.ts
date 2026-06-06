@@ -27,7 +27,6 @@ export default class MainController {
   static hb1(req: Request, res: Response): void {
     res.render('hb1', {
       mensagem: 'Olá, você está aprendendo Express + Handlebars!',
-      layout: false,
     });
   }
 
@@ -36,7 +35,6 @@ export default class MainController {
       poweredByNodejs: true,
       nome: 'Express',
       tipo: 'Framework',
-      layout: false,
     });
   }
 
@@ -50,7 +48,6 @@ export default class MainController {
 
     res.render('hb3', {
       professores,
-      layout: false,
     });
   }
 
@@ -67,7 +64,6 @@ export default class MainController {
 
     res.render('hb4', {
       technologies,
-      layout: false,
     });
   }
 }
