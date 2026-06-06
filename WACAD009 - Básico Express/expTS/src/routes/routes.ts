@@ -1,75 +1,18 @@
-import { Router, Request, Response } from 'express';
-import { LoremIpsum } from 'lorem-ipsum';
+import { Router } from 'express';
+import MainController from '../controllers/MainController.js';
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
-  res.send('<h1>Hello World!</h1>');
-});
+router.get('/', MainController.home);
 
-router.get('/lorem/:quantidade', (req: Request, res: Response) => {
-  const quantidade = Number(req.params.quantidade);
+router.get('/lorem/:quantidade', MainController.lorem);
 
-  if (isNaN(quantidade) || quantidade <= 0) {
-    res.status(400).send('Informe uma quantidade válida.');
-    return;
-  }
+router.get('/hb1', MainController.hb1);
 
-  const lorem = new LoremIpsum();
+router.get('/hb2', MainController.hb2);
 
-  const paragrafos = Array.from(
-    { length: quantidade },
-    () => lorem.generateParagraphs(1)
-  );
+router.get('/hb3', MainController.hb3);
 
-  res.send(paragrafos.join('<br><br>'));
-});
-
-router.get('/hb1', (req: Request, res: Response) => {
-  res.render('hb1', {
-    mensagem: 'Olá, você está aprendendo Express + Handlebars!',
-    layout: false
-  });
-});
-
-router.get('/hb2', (req: Request, res: Response) => {
-  res.render('hb2', {
-    poweredByNodejs: true,
-    nome: 'Express',
-    tipo: 'Framework',
-    layout: false
-  });
-});
-
-router.get('/hb3', (req: Request, res: Response) => {
-  const professores = [
-    { nome: 'David Fernandes', sala: 1238 },
-    { nome: 'Horácio Fernandes', sala: 1233 },
-    { nome: 'Edleno Moura', sala: 1236 },
-    { nome: 'Elaine Harada', sala: 1231 }
-  ];
-
-  res.render('hb3', {
-    professores,
-    layout: false
-  });
-});
-
-router.get('/hb4', (req: Request, res: Response) => {
-  const technologies = [
-    { name: 'Express', type: 'Framework', poweredByNodejs: true },
-    { name: 'Laravel', type: 'Framework', poweredByNodejs: false },
-    { name: 'React', type: 'Library', poweredByNodejs: true },
-    { name: 'Handlebars', type: 'Engine View', poweredByNodejs: true },
-    { name: 'Django', type: 'Framework', poweredByNodejs: false },
-    { name: 'Docker', type: 'Virtualization', poweredByNodejs: false },
-    { name: 'Sequelize', type: 'ORM tool', poweredByNodejs: true },
-  ];
-
-  res.render('hb4', {
-    technologies,
-    layout: false,
-  });
-});
+router.get('/hb4', MainController.hb4);
 
 export default router;
