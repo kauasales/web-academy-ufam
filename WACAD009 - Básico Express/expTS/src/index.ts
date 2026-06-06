@@ -1,15 +1,18 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
+import { logger } from './middleware/logger.js';
 
 dotenv.config();
 
 const app = express();
-const PORT: number = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 3333;
 
-app.get('/', (req: Request, res: Response) => {
+app.use(logger('completo'));
+
+app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>');
 });
 
 app.listen(PORT, () => {
-  console.log(`Express app iniciada na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
