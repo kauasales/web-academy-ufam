@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Clientes - Hotel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> Sistema de Gestão Hoteleira</h1>
+            <p>Cadastro e Controle de Clientes</p>
+        </header>
+
+        <main class="grid-layout">
+            <section class="card form-section">
+                <h2 id="form-title">Cadastrar Novo Cliente</h2>
+                <form id="client-form">
+                    <div class="input-group">
+                        <label for="rg">RG (Identificação)</label>
+                        <input type="text" id="rg" required placeholder="Ex: 12.345.678-9">
+                    </div>
+                    <div class="input-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" required placeholder="Ex: Maria Silva">
+                    </div>
+                    <div class="row">
+                        <div class="input-group">
+                            <label for="sexo">Sexo</label>
+                            <select id="sexo" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="fone">Telefone</label>
+                            <input type="tel" id="fone" required placeholder="Ex: (11) 99999-9999">
+                        </div>
+                    </div>
+                    <button type="submit" id="btn-submit" class="btn btn-primary">Salvar Cliente</button>
+                    <button type="button" id="btn-cancel" class="btn btn-secondary hidden">Cancelar Edição</button>
+                </form>
+            </section>
+
+            <section class="card table-section">
+                <h2>Clientes Cadastrados</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>RG</th>
+                                <th>Nome</th>
+                                <th>Sexo</th>
+                                <th>Telefone</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="client-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const API_URL = '/api/clientes';
+        const form = document.getElementById('client-form');
+        const tableBody = document.getElementById('client-table-body');
+        const rgInput = document.getElementById('rg');
+        const nomeInput = document.getElementById('nome');
+        const sexoInput = document.getElementById('sexo');
+        const foneInput = document.getElementById('fone');
+        const formTitle = document.getElementById('form-title');
+        const btnSubmit = document.getElementById('btn-submit');
+        const btnCancel = document.getElementById('btn-cancel');
+
+        let isEditing = false;
+
+        async function fetchClients() {
+            const res = await fetch(API_URL);
+            const clients = await res.json();
+            tableBody.innerHTML = '';
+            clients.forEach(client => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${client.rg}</td>
+                    <td><b>${client.nome}</b></td>
+                    <td>${client.sexo}</td>
+                    <td>${client.fone}</td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="setupEdit('${client.rg}', '${client.nome}', '${client.sexo}', '${client.fone}')">Editar</button>
+                        <button class="btn-action btn-delete" onclick="deleteClient('${client.rg}')">Deletar</button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                rg: rgInput.value,
+                nome: nomeInput.value,
+                sexo: sexoInput.value,
+                fone: foneInput.value
+            };
+
+            if (isEditing) {
+                await fetch(`${API_URL}/${payload.rg}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                resetForm();
+            } else {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if(!res.ok) {
+                    const err = await res.json();
+                    alert(err.error);
+                    return;
+                }
+                form.reset();
+            }
+            fetchClients();
+        });
+
+        function setupEdit(rg, nome, sexo, fone) {
+            isEditing = true;
+            formTitle.innerText = "Editar Cliente";
+            rgInput.value = rg;
+            rgInput.disabled = true; // Não permite alterar Chave Primária
+            nomeInput.value = nome;
+            sexoInput.value = sexo;
+            foneInput.value = fone;
+            btnSubmit.innerText = "Atualizar Dados";
+            btnCancel.classList.remove('hidden');
+        }
+
+        function resetForm() {
+            isEditing = false;
+            formTitle.innerText = "Cadastrar Novo Cliente";
+            rgInput.disabled = false;
+            form.reset();
+            btnSubmit.innerText = "Salvar Cliente";
+            btnCancel.classList.add('hidden');
+        }
+
+        btnCancel.addEventListener('click', resetForm);
+
+        async function deleteClient(rg) {
+            if (confirm('Deseja realmente excluir este cliente?')) {
+                await fetch(`${API_URL}/${rg}`, { method: 'DELETE' });
+                fetchClients();
+                if(rgInput.value === rg) resetForm();
+            }
+        }
+
+        // Carga inicial
+        fetchClients();
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Cliente {
+  rg       String   @id @db.VarChar(20)
+  nome     String   @db.VarChar(100)
+  sexo     String   @db.Char(1)
+  fone     String   @db.VarChar(20)
+
+  ocupacoes Ocupa[]
+  reservas  Reserva[]
+  solicitacoes Solicita[]
+
+  @@map("cliente")
+}
+
+model Quarto {
+  numQuarto Int      @id @map("Num_Quarto")
+  tipo      String   @db.VarChar(50)
+  andar     Int
+  preco     Decimal  @db.Decimal(10, 2) @map("Preço")
+  
+  ocupacoes Ocupa[]
+  reservas  Reserva[]
+  solicitacoes Solicita[]
+
+  @@map("quarto")
+}
+
+model Ocupa {
+  rg           String   @db.VarChar(20)
+  numQuarto    Int      @map("Num_Quarto")
+  tempoEntrada DateTime @map("Tempo_Entrada")
+  tempoSaida   DateTime? @map("Tempo_Saida")
+
+  cliente      Cliente  @relation(fields: [rg], references: [rg])
+  quarto       Quarto   @relation(fields: [numQuarto], references: [numQuarto])
+
+  @@id([rg, numQuarto, tempoEntrada])
+  @@map("ocupa")
+}
+
+model Reserva {
+  rg                String   @db.VarChar(20)
+  numQuarto         Int      @map("Num_Quarto")
+  dataReservaInicio DateTime @map("data_reserva_inicio")
+  dataReservaFim    DateTime @map("data_reserva_fim")
+
+  cliente           Cliente  @relation(fields: [rg], references: [rg])
+  quarto            Quarto   @relation(fields: [numQuarto], references: [numQuarto])
+
+  @@id([rg, numQuarto, dataReservaInicio])
+  @@map("reserva")
+}
+
+model Servico {
+  codServico  Int     @id @map("Cód_Serviço")
+  descricao   String  @db.VarChar(150) @map("Descrição")
+  valor       Decimal @db.Decimal(10, 2)
+  tipo        String  @db.VarChar(50)
+
+  solicitacoes Solicita[]
+  @@map("serviço")
+}
+
+model Solicita {
+  rg         String  @db.VarChar(20)
+  numQuarto  Int     @map("Num_Quarto")
+  codServico Int     @map("Cód_Serviço")
+
+  cliente    Cliente @relation(fields: [rg], references: [rg])
+  quarto     Quarto  @relation(fields: [numQuarto], references: [numQuarto])
+  servico    Servico @relation(fields: [codServico], references: [codServico])
+
+  @@id([rg, numQuarto, codServico])
+  @@map("solicita")
+}
