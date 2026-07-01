@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    height: 100vh;
+    background-image: url("https://cdn.esahubble.org/archives/images/screen/heic2210a.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+}
+
+.card {
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border: 5px solid #d4a056;
+    border-radius: 15px;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.card h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+}
