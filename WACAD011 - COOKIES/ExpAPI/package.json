@@ -12,6 +12,7 @@
   "dependencies": {
     "@prisma/client": "^6.16.3",
     "express": "^5.2.1",
+    "joi": "^18.2.3",
     "prisma": "^6.16.3"
   },
   "devDependencies": {
