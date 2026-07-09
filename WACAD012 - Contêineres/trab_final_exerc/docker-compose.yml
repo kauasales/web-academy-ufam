@@ -1,0 +1,59 @@
+services:
+  # Banco de Dados MySQL
+  db:
+    image: mysql:8.0
+    container_name: mysql_banco
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: senha_webacademy
+      MYSQL_DATABASE: web_academy_books
+    volumes:
+      - mysql_dados:/var/lib/mysql
+      - ./banco:/docker-entrypoint-initdb.d
+
+  # Gerenciador phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_gerenciador
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+  # Backend Node.js + TS
+  backend:
+    build: ./backend
+    container_name: node_backend
+    restart: always
+    ports:
+      - "4444:4444"
+    environment:
+      PORT: 4444
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: senha_webacademy
+      DB_NAME: web_academy_books
+      DB_PORT: 3306
+    volumes:
+      - log_dados:/log
+    depends_on:
+      - db
+
+  # Frontend React + TS (Nginx)
+  frontend:
+    build: ./frontend
+    container_name: react_frontend
+    restart: always
+    ports:
+      - "8000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_dados:
+  log_dados:
