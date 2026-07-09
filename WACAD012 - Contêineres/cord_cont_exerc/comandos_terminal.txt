@@ -1,0 +1,21 @@
+# 1. Criar a rede para os containers se comunicarem
+docker network create rede-app
+
+# 2. Construir e rodar o Backend
+cd backend
+docker build -t app-backend .
+docker run --name back --network rede-app -p 4000:4000 -d app-backend
+cd ..
+
+# 3. Construir e rodar o Frontend
+cd frontend
+docker build -t app-frontend .
+docker run --name front --network rede-app -p 3000:3000 -d app-frontend
+
+# 4. Para testar:
+# 4.1. Execute:
+    docker logs -f back
+
+# 4.2. Abra o seu navegador e acesse: http://localhost:3000
+
+# 4.3. Digite e envie uma mensagem e visualize ela também no terminal, onde executou o passo 4.1
