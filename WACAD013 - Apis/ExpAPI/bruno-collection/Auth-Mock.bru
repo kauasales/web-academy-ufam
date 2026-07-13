@@ -1,0 +1,20 @@
+meta {
+  name: Auth Mock
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:3000/auth/mock
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": 1,
+    "name": "Admin",
+    "email": "admin@test.com",
+    "userTypeId": 1
+  }
+}
