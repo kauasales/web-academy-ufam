@@ -1,0 +1,20 @@
+meta {
+  name: Criar Usuário
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:3000/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Ana Silva",
+    "email": "ana@email.com",
+    "password": "123456",
+    "userTypeId": 1
+  }
+}

@@ -1,0 +1,16 @@
+meta {
+  name: Atualizar Usuário
+  type: http
+  seq: 12
+}
+
+put {
+  url: http://localhost:3000/users/1
+  body: json
+  auth: none
+}
+
+body:json {
+  "name": "Ana Silva Atualizada",
+  "email": "ana.atualizada@email.com"
+}

@@ -1,0 +1,17 @@
+meta {
+  name: Atualizar Produto
+  type: http
+  seq: 15
+}
+
+put {
+  url: http://localhost:3000/products/1
+  body: json
+  auth: none
+}
+
+body:json {
+  "name": "Mouse Gamer Atualizado",
+  "price": 249.9,
+  "stock": 15
+}
