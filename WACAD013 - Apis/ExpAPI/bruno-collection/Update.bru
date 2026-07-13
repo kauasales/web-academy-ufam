@@ -1,0 +1,18 @@
+meta {
+  name: Atualizar Produto
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/products/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "price": 229.90,
+    "stock": 2
+  }
+}

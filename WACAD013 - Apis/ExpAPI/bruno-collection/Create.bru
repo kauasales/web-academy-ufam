@@ -1,0 +1,20 @@
+meta {
+  name: Criar Produto
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/products
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "",
+    "description": "Switch Blue, Layout ABNT2",
+    "price": 249.90,
+    "stock": 15
+  }
+}
