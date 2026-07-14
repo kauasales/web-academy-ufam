@@ -40,7 +40,7 @@ export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  if (fakeAuthSession.user.userTypeId !== 1) {
+  if (fakeAuthSession.user.userTypeId !== 2) {
     return res.status(403).json({ error: 'Forbidden' });
   }
 

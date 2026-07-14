@@ -10,20 +10,21 @@ const createMessages = (language: Language) => ({
   'string.email': getLanguageMessage('user-email-invalid', language, 'O e-mail deve ser um endereço válido.'),
   'any.required': getLanguageMessage('user-required', language, 'O campo é obrigatório.'),
   'number.positive': getLanguageMessage('user-type-positive', language, 'O tipo de usuário deve ser um número maior que zero.'),
+  'any.only': getLanguageMessage('user-type-invalid', language, 'O tipo de usuário deve ser 1 ou 2.'),
 });
 
 export const createUserSchema = (language: Language = 'pt-BR') => Joi.object({
   name: Joi.string().trim().min(3).max(100).required().messages(createMessages(language)),
   email: Joi.string().trim().email().required().messages(createMessages(language)),
   password: Joi.string().min(6).required().messages(createMessages(language)),
-  userTypeId: Joi.number().integer().positive().required().messages(createMessages(language)),
+  userTypeId: Joi.number().integer().valid(1, 2).required().messages(createMessages(language)),
 });
 
 export const updateUserSchema = (language: Language = 'pt-BR') => Joi.object({
   name: Joi.string().trim().min(3).max(100).messages(createMessages(language)),
   email: Joi.string().trim().email().messages(createMessages(language)),
   password: Joi.string().min(6).messages(createMessages(language)),
-  userTypeId: Joi.number().integer().positive().messages(createMessages(language)),
+  userTypeId: Joi.number().integer().valid(1, 2).messages(createMessages(language)),
 }).min(1);
 
 export const validateUserBody = (schemaOrFactory: Joi.ObjectSchema | ((language: Language) => Joi.ObjectSchema)) => {

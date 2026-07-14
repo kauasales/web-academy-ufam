@@ -5,6 +5,7 @@ import { userRouter } from './resources/user/user.routes';
 import { productRouter } from './resources/product/product.routes';
 import { languageRouter } from './resources/language/language.routes';
 import { setAuthUser, isAuth, isAdmin } from './middlewares/auth.middleware';
+import { comparePassword, sanitizeUser } from './resources/user/user.utils';
 
 const app = express();
 const prisma = new PrismaClient();
@@ -22,13 +23,61 @@ app.get('/admin-demo', isAdmin, (req, res) => {
   res.json({ user: req.user });
 });
 
-app.post('/auth/mock', (req, res) => {
-  const { id, name, email, userTypeId } = req.body;
-  setAuthUser({ id, name, email, userTypeId });
-  res.json({ ok: true });
+app.post('/auth/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required.' });
+  }
+
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials.' });
+    }
+
+    const isValidPassword = await comparePassword(password, user.password);
+
+    if (!isValidPassword || (user.userTypeId !== 1 && user.userTypeId !== 2)) {
+      return res.status(401).json({ error: 'Invalid credentials.' });
+    }
+
+    setAuthUser({ id: user.id, name: user.name, email: user.email, userTypeId: user.userTypeId });
+    res.json({ ok: true, user: sanitizeUser(user) });
+  } catch (error) {
+    res.status(500).json({ error: 'Unable to authenticate user.' });
+  }
 });
 
-app.post('/auth/logout', (_req, res) => {
+app.post('/auth/mock', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required.' });
+  }
+
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials.' });
+    }
+
+    const isValidPassword = await comparePassword(password, user.password);
+
+    if (!isValidPassword || (user.userTypeId !== 1 && user.userTypeId !== 2)) {
+      return res.status(401).json({ error: 'Invalid credentials.' });
+    }
+
+    setAuthUser({ id: user.id, name: user.name, email: user.email, userTypeId: user.userTypeId });
+    res.json({ ok: true, user: sanitizeUser(user) });
+  } catch (error) {
+    res.status(500).json({ error: 'Unable to authenticate user.' });
+  }
+});
+
+app.post('/auth/logout', isAuth, (_req, res) => {
   setAuthUser(null);
   res.json({ ok: true });
 });

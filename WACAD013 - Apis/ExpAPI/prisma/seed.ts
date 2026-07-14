@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const types = ['admin', 'common'];
+  const types = ['common', 'admin'];
 
   for (const name of types) {
     await prisma.userType.upsert({

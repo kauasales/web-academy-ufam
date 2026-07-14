@@ -28,7 +28,7 @@ test('isAuth denies unauthenticated requests', () => {
 });
 
 test('isAdmin allows admin users and denies non-admins', () => {
-  setAuthUser({ id: 1, name: 'Admin', email: 'admin@test.com', userTypeId: 1 });
+  setAuthUser({ id: 1, name: 'Admin', email: 'admin@test.com', userTypeId: 2 });
 
   const adminReq: any = {};
   const adminRes: any = { status(code: number) { this.statusCode = code; return this; }, json(payload: unknown) { this.payload = payload; return this; } };
@@ -39,9 +39,9 @@ test('isAdmin allows admin users and denies non-admins', () => {
   isAdmin(adminReq, adminRes, adminNext);
 
   assert.equal(adminRes.statusCode, undefined);
-  assert.equal(adminReq.user?.userTypeId, 1);
+  assert.equal(adminReq.user?.userTypeId, 2);
 
-  setAuthUser({ id: 2, name: 'User', email: 'user@test.com', userTypeId: 2 });
+  setAuthUser({ id: 2, name: 'User', email: 'user@test.com', userTypeId: 1 });
 
   const userReq: any = {};
   const userRes: any = { status(code: number) { this.statusCode = code; return this; }, json(payload: unknown) { this.payload = payload; return this; } };
