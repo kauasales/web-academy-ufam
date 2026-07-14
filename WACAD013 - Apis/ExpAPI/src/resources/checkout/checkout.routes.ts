@@ -12,6 +12,75 @@ const getLocalizedMessage = (req: Request, key: string, fallback: string) => {
   return getLanguageMessage(key, language, fallback);
 };
 
+/**
+ * @swagger
+ * /checkout/add:
+ *   post:
+ *     summary: Adiciona um produto ao carrinho
+ *     tags: [Checkout]
+ *     security:
+ *       - cookieAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - productId
+ *               - quantity
+ *             properties:
+ *               productId:
+ *                 type: integer
+ *                 example: 1
+ *                 description: ID do produto
+ *               quantity:
+ *                 type: integer
+ *                 example: 2
+ *                 description: Quantidade do produto
+ *     responses:
+ *       200:
+ *         description: Produto adicionado ao carrinho com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Product added to cart."
+ *                 cart:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       productId:
+ *                         type: integer
+ *                       quantity:
+ *                         type: integer
+ *       400:
+ *         description: Requisição inválida (ID inválido, quantidade inválida ou estoque insuficiente)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   examples:
+ *                     invalidId:
+ *                       value: "The product id is invalid."
+ *                     invalidQuantity:
+ *                       value: "The quantity must be greater than zero."
+ *                     stockUnavailable:
+ *                       value: "Stock unavailable for the requested quantity."
+ *       401:
+ *         description: Não autorizado - Usuário não autenticado
+ *       404:
+ *         description: Produto não encontrado
+ *       500:
+ *         description: Erro interno ao adicionar produto ao carrinho
+ */
 router.post('/add', isAuth, async (req: Request, res: Response) => {
   const { productId, quantity } = req.body;
   const userId = req.user?.id;
@@ -46,6 +115,47 @@ router.post('/add', isAuth, async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @swagger
+ * /checkout/finish:
+ *   post:
+ *     summary: Finaliza a compra do carrinho atual
+ *     tags: [Checkout]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Compra finalizada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Purchase completed successfully."
+ *                 cart:
+ *                   type: array
+ *                   example: []
+ *       400:
+ *         description: Carrinho vazio ou erro ao finalizar compra
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   examples:
+ *                     emptyCart:
+ *                       value: "The cart is empty."
+ *                     completeError:
+ *                       value: "Error completing the purchase."
+ *       401:
+ *         description: Não autorizado - Usuário não autenticado
+ *       500:
+ *         description: Erro interno ao finalizar compra
+ */
 router.post('/finish', isAuth, async (req: Request, res: Response) => {
   const userId = req.user?.id;
 
