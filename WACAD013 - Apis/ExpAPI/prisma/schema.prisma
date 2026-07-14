@@ -8,13 +8,14 @@ generator client {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int               @id @default(autoincrement())
   name        String
   description String?
   price       Float
-  stock       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  stock       Int               @default(0)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  orderItems  CheckoutOrderItem[]
 }
 
 model UserType {
@@ -26,12 +27,34 @@ model UserType {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
+  id          Int               @id @default(autoincrement())
   name        String
-  email       String   @unique
+  email       String            @unique
   password    String
   userTypeId  Int
-  userType    UserType @relation(fields: [userTypeId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  userType    UserType          @relation(fields: [userTypeId], references: [id])
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  orders      CheckoutOrder[]
+}
+
+model CheckoutOrder {
+  id        Int               @id @default(autoincrement())
+  userId    Int
+  user      User              @relation(fields: [userId], references: [id])
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  items     CheckoutOrderItem[]
+}
+
+model CheckoutOrderItem {
+  id        Int           @id @default(autoincrement())
+  orderId   Int
+  order     CheckoutOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId Int
+  product   Product       @relation(fields: [productId], references: [id])
+  quantity  Int
+  unitPrice Float
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }

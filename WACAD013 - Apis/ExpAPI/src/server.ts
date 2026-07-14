@@ -4,6 +4,7 @@ import { getLanguageFromCookie } from './resources/language/language';
 import { userRouter } from './resources/user/user.routes';
 import { productRouter } from './resources/product/product.routes';
 import { languageRouter } from './resources/language/language.routes';
+import { checkoutRouter } from './resources/checkout/checkout.routes';
 import { setAuthUser, isAuth, isAdmin } from './middlewares/auth.middleware';
 import { comparePassword, sanitizeUser } from './resources/user/user.utils';
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/users', userRouter);
 app.use('/products', productRouter);
 app.use('/language', languageRouter);
+app.use('/checkout', checkoutRouter);
 
 app.get('/auth-demo', isAuth, (req, res) => {
   res.json({ user: req.user });

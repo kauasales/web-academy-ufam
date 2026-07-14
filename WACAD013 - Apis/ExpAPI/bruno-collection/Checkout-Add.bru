@@ -1,0 +1,18 @@
+meta {
+  name: Adicionar ao Carrinho
+  type: http
+  seq: 20
+}
+
+post {
+  url: http://localhost:3000/checkout/add
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "productId": 1,
+    "quantity": 2
+  }
+}
