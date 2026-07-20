@@ -1,24 +1,32 @@
 'use client'
+import { useState } from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import CartSummary from '../components/CartSummary/CartSummary'
 import CartList from '../components/CartList/CartList'
-import { ItemCarrinho } from '../components/CartItem/CartItem'
-
-const mockCartItems: ItemCarrinho[] = [
-  { id: 'prod-1', nome: 'Monitor UltraWide 34"', precoUnitario: 2200, quantidade: 1 },
-  { id: 'prod-2', nome: 'Teclado Mecânico RGB', precoUnitario: 450, quantidade: 2 },
-  { id: 'prod-3', nome: 'Mouse Gamer Sem Fio', precoUnitario: 350, quantidade: 2 },
-]
+import { mockCartItems } from '../mocks/cartItems'
+import { CartItems } from '../types/cart'
 
 export default function Cart() {
+  const [items, setItems] = useState<CartItems[]>(mockCartItems)
+
+  const removeItemFromCart = (id: string) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id))
+  }
+
+  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0)
+  const totalValue = items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  )
+
   return (
     <>
       <Navbar />
       
       <main>
         <div className='container p-5'>
-          <CartList items={mockCartItems} />
-          <CartSummary totalQuantity={5} totalValue={3800} />
+          <CartList items={items} onRemoveItem={removeItemFromCart} />
+          <CartSummary totalQuantity={totalQuantity} totalValue={totalValue} />
         </div>
       </main>
     </>

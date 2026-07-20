@@ -1,11 +1,13 @@
 import React from 'react'
-import CartItem, { ItemCarrinho } from '../CartItem/CartItem'
+import CartItem from '../CartItem/CartItem'
+import { CartItems } from '../../types/cart'
 
 interface CartListProps {
-  items: ItemCarrinho[]
+  items: CartItems[]
+  onRemoveItem: (id: string) => void
 }
 
-export default function CartList({ items }: CartListProps) {
+export default function CartList({ items, onRemoveItem }: CartListProps) {
   return (
     <div className='card mb-4'>
       <div className='row card-body'>
@@ -25,7 +27,7 @@ export default function CartList({ items }: CartListProps) {
             </thead>
             <tbody>
               {items.map((item) => (
-                <CartItem key={item.id} item={item} />
+                <CartItem key={item.id} item={item} onRemoveItem={onRemoveItem} />
               ))}
             </tbody>
           </table>
