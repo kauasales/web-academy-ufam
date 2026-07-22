@@ -17,8 +17,6 @@ export default function Products() {
 
   return (
     <>
-      <Navbar />
-
       <main>
         <div className='container p-5'>
           <CartSummary totalQuantity={totalQuantity} totalValue={totalValue} />

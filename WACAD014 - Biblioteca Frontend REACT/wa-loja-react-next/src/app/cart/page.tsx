@@ -20,9 +20,7 @@ export default function Cart() {
   )
 
   return (
-    <>
-      <Navbar />
-      
+    <>      
       <main>
         <div className='container p-5'>
           <CartList items={items} onRemoveItem={removeItemFromCart} />
