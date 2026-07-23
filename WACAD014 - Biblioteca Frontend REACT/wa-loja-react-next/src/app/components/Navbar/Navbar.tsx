@@ -1,9 +1,15 @@
-'use client'
+﻿'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function Navbar() {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogout = () => {
+    // Aqui você poderia limpar tokens, estados de auth, etc.
+    router.push('/login')
+  }
 
   if (pathname === '/login' || pathname === '/register') {
     return null
@@ -46,7 +52,7 @@ export default function Navbar() {
               </li>
             </ul>
 
-            <button className='btn btn-dark'>Sair</button>
+            <button className='btn btn-dark' onClick={handleLogout}>Sair</button>
           </div>
         </div>
       </nav>
