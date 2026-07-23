@@ -9,3 +9,7 @@ export const getProducts = async () => {
     console.log(response.data)
     return response.data;
 }
+
+export const favoriteApi = axios.create({
+    baseURL: 'https://web-academy-ufam-favorites-json-ser.vercel.app/favoritos'
+})
