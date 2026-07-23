@@ -1,4 +1,20 @@
+﻿'use client'
+
+import { usePathname, useRouter } from 'next/navigation'
+
 export default function Navbar() {
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogout = () => {
+    // Aqui você poderia limpar tokens, estados de auth, etc.
+    router.push('/login')
+  }
+
+  if (pathname === '/login' || pathname === '/register') {
+    return null
+  }
+
   return (
     <>
       <nav className='navbar navbar-expand-md bg-light border-bottom border-body sticky-top'>
@@ -29,9 +45,14 @@ export default function Navbar() {
                   Carrinho
                 </a>
               </li>
+              <li className='nav-item'>
+                <a className='nav-link' href='/favorites'>
+                  Favoritos
+                </a>
+              </li>
             </ul>
 
-            <button className='btn btn-dark'>Sair</button>
+            <button className='btn btn-dark' onClick={handleLogout}>Sair</button>
           </div>
         </div>
       </nav>

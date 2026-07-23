@@ -1,13 +1,13 @@
 export type Product = {
     id: string;
-    name: string; 
-    images: {
-        name: string;
+    nome: string; 
+    fotos: {
+        titulo: string;
         src: string;
     }[];
-        price: string;
-    rebate: number;
-    description: string;
-    sold: string;
-    user_id: string; 
+    preco: string;
+    desconto: number;
+    descricao: string;
+    vendido: string;
+    usuario_id: string; 
 }

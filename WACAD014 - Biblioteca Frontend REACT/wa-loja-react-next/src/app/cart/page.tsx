@@ -13,16 +13,14 @@ export default function Cart() {
     setItems((prevItems) => prevItems.filter((item) => item.id !== id))
   }
 
-  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0)
+  const totalQuantity = items.reduce((acc, item) => acc + item.quantidade, 0)
   const totalValue = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + item.preco * item.quantidade,
     0
   )
 
   return (
-    <>
-      <Navbar />
-      
+    <>      
       <main>
         <div className='container p-5'>
           <CartList items={items} onRemoveItem={removeItemFromCart} />
