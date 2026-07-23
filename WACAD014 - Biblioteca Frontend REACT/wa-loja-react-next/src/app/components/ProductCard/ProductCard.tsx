@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { Product } from '../../types/product'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { favoriteApi } from '../../services/api'
@@ -11,7 +12,12 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+  const router = useRouter()
   const queryClient = useQueryClient()
+
+  const viewProductDetails = (id: string) => {
+    router.push(`/product/${id.toLowerCase()}`)
+  }
 
   const { data: favorites } = useQuery<Product[]>({
     queryKey: ['favorites'],
@@ -63,6 +69,8 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           alt={product.nome}
           width={300}
           height={320}
+          style={{ cursor: 'pointer' }}
+          onClick={() => viewProductDetails(product.id)}
         />
         <div className='card-body bg-light'>
           <h5 className='card-title'>{product.nome}</h5>
