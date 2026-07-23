@@ -1,7 +1,7 @@
 import {CartItems} from '../types/cart'
 
 export const mockCartItems: CartItems[] = [
-  { id: '1', nome: 'Bicicleta', preco: 1000, quantidade: 2 },
-  { id: '2', nome: 'Echo dot', preco: 600, quantidade: 1 },
-  { id: '3', nome: 'Celular', preco: 1500, quantidade: 3 }
+  { id: '1', name: 'Bicicleta', price: 1000, quantity: 2 },
+  { id: '2', name: 'Echo dot', price: 600, quantity: 1 },
+  { id: '3', name: 'Celular', price: 1500, quantity: 3 }
 ]

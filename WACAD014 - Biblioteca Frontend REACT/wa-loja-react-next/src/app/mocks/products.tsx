@@ -3,89 +3,89 @@ import { Product } from '../types/product'
 export const mockProducts: Product[] = [
   {
     id: 'notebook-3',
-    fotos: [
+    images: [
       {
-        titulo: 'notebook-4',
+        name: 'notebook-4',
         src: 'https://ranekapi.origamid.dev/wp-content/uploads/2019/03/notebook-2.jpg'
       },
       {
-        titulo: 'smartwatch-3',
+        name: 'smartwatch-3',
         src: 'https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartwatch-2.jpg'
       }
     ],
-    nome: 'Notebook',
-    preco: '2300',
-    desconto: 15,
-    descricao: 'descrição legal',
-    vendido: 'false',
-    usuario_id: 'lobo@origamid.com'
+    name: 'Notebook',
+    price: '2300',
+    rebate: 15,
+    description: 'descrição legal',
+    sold: 'false',
+    user_id: 'lobo@origamid.com'
   },
   {
     id: 'smartphone-2',
-    fotos: [
+    images: [
       {
-        titulo: 'smartphone-3',
+        name: 'smartphone-3',
         src: 'https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartphone-2.jpg'
       },
       {
-        titulo: 'tablet-3',
+        name: 'tablet-3',
         src: 'https://ranekapi.origamid.dev/wp-content/uploads/2019/03/tablet-2.jpg'
       }
     ],
-    nome: 'Smartphone',
-    preco: '2399',
-    desconto: 8,
-    descricao: 'descrição legal',
-    vendido: 'false',
-    usuario_id: 'lobo@origamid.com'
+    name: 'Smartphone',
+    price: '2399',
+    rebate: 8,
+    description: 'descrição legal',
+    sold: 'false',
+    user_id: 'lobo@origamid.com'
   },
   {
     id: 'camera',
-    fotos: [
+    images: [
       {
-        titulo: 'camera-2',
+        name: 'camera-2',
         src: 'https://ranekapi.origamid.dev/wp-content/uploads/2019/03/camera.jpg'
       }
     ],
-    nome: 'Câmera',
-    preco: '2199',
-    desconto: 10,
-    descricao: 'descrição legal',
-    vendido: 'false',
-    usuario_id: 'lobo@origamid.com'
+    name: 'Câmera',
+    price: '2199',
+    rebate: 10,
+    description: 'descrição legal',
+    sold: 'false',
+    user_id: 'lobo@origamid.com'
   },
   {
     id: 'smartwatch',
-    fotos: [
+    images: [
       {
-        titulo: 'smartwatch-2',
+        name: 'smartwatch-2',
         src: 'https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartwatch-1.jpg'
       }
     ],
-    nome: 'Smartwatch',
-    preco: '1199',
-    desconto: 8,
-    descricao: 'descrição legal',
-    vendido: 'false',
-    usuario_id: 'lobo@origamid.com'
+    name: 'Smartwatch',
+    price: '1199',
+    rebate: 8,
+    description: 'descrição legal',
+    sold: 'false',
+    user_id: 'lobo@origamid.com'
   },
   {
     id: 'smartspeaker',
-    fotos: [
+    images: [
       {
-        titulo: 'speaker',
+        name: 'speaker',
         src: 'https://ranekapi.origamid.dev/wp-content/uploads/2019/03/speaker.jpg'
       },
       {
-        titulo: 'tablet',
+        name: 'tablet',
         src: 'https://ranekapi.origamid.dev/wp-content/uploads/2019/03/tablet.jpg'
       }
     ],
-    nome: 'Smartspeaker',
-    preco: '1499',
-    desconto: 10,
-    descricao: 'Esse é um speaker novo.',
-    vendido: 'false',
-    usuario_id: 'maria@origamid.com'
+    name: 'Smartspeaker',
+    price: '1499',
+    rebate: 10,
+    description: 'Esse é um speaker novo.',
+    sold: 'false',
+    user_id: 'maria@origamid.com'
   }
 ]

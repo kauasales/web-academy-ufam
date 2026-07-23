@@ -12,10 +12,10 @@ export default function CartItem({ item, onRemoveItem }: CartItemProps) {
 
   return (
     <tr>
-      <td>{item.nome}</td>
-      <td>R$ {item.preco.toFixed(2)}</td>
-      <td>{item.quantidade}</td>
-      <td>R$ {getProductTotal(item.preco, item.quantidade).toFixed(2)}</td>
+      <td>{item.name}</td>
+      <td>R$ {item.price.toFixed(2)}</td>
+      <td>{item.quantity}</td>
+      <td>R$ {getProductTotal(item.price, item.quantity).toFixed(2)}</td>
       <td>
         <button
           className='btn btn-danger btn-sm'
