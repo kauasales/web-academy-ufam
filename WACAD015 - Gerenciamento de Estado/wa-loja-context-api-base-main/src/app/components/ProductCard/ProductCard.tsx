@@ -1,27 +1,23 @@
+'use client'
+
 import { calculateDiscountedPrice } from '@/app/helpers'
 import { Product } from '@/app/types/product'
+import { useFavoritesContext } from '@/app/context/FavoritesContext'
 import Image from 'next/image'
 
 interface ProductCardProps {
   product: Product
-  favorites: Product[]
-  setFavorites: React.Dispatch<React.SetStateAction<Product[]>>
   showImage?: boolean
   showButton?: boolean
 }
 
 export default function ProductCard({
   product,
-  favorites,
-  setFavorites,
   showImage = true,
   showButton = true
 }: ProductCardProps) {
-  const addToFavorites = (productToAdd: Product) => {
-    setFavorites((currentFavorites) => [...currentFavorites, productToAdd])
-  }
-
-  const isFavorite = favorites.some((item) => item.id === product.id)
+  const { addFavorite, isFavorite } = useFavoritesContext()
+  const isProductFavorite = isFavorite(product.id)
 
   return (
     <div className='col'>
@@ -50,15 +46,15 @@ export default function ProductCard({
           {showButton ? (
             <button
               className={
-                isFavorite
+                isProductFavorite
                   ? 'btn btn-success d-block w-100'
                   : 'btn btn-secondary d-block w-100'
               }
               type='button'
-              onClick={() => addToFavorites(product)}
-              disabled={isFavorite}
+              onClick={() => addFavorite(product)}
+              disabled={isProductFavorite}
             >
-              {isFavorite ? 'Favoritado' : 'Favoritar'}
+              {isProductFavorite ? 'Favoritado' : 'Favoritar'}
             </button>
           ) : null}
         </div>
@@ -66,3 +62,4 @@ export default function ProductCard({
     </div>
   )
 }
+

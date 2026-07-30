@@ -1,9 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-
-import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useAuthContext } from '@/app/context/AuthContext'
 
 type RegisterFormInputs = {
   nome: string
@@ -19,11 +18,12 @@ export default function RegisterPage() {
     formState: { errors }
   } = useForm<RegisterFormInputs>()
 
-  const router = useRouter()
+  const { login } = useAuthContext()
 
-  const onSubmit: SubmitHandler<RegisterFormInputs> = () => {
-    router.push('/')
+  const onSubmit: SubmitHandler<RegisterFormInputs> = (data) => {
+    login(data.email)
   }
+
   return (
     <main>
       <div className='container-fluid d-flex min-vh-100'>

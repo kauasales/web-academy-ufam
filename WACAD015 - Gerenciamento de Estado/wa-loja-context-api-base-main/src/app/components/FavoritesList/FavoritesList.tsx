@@ -1,28 +1,17 @@
-import { calculateDiscountedPrice } from '@/app/helpers'
-import { Product } from '@/app/types/product'
+'use client'
+
+import { useFavoritesContext } from '@/app/context/FavoritesContext'
 import FavoriteItem from '../FavoriteItem/FavoriteItem'
 
-interface FavoritesListProps {
-  favoriteProducts: Product[]
-  setFavorites: React.Dispatch<React.SetStateAction<Product[]>>
-}
-
-export default function FavoritesList({
-  favoriteProducts,
-  setFavorites
-}: FavoritesListProps) {
-  const totalFavoriteValue = favoriteProducts.reduce((acc, product) => {
-    return (
-      acc + calculateDiscountedPrice(Number(product.preco), product.desconto)
-    )
-  }, 0)
+export default function FavoritesList() {
+  const { favorites, totalFavoritesValue } = useFavoritesContext()
 
   return (
     <div className='card mb-4'>
       <div className='row card-body'>
         <h5 className='card-title mb-4 fw-bold'>Lista de favoritos:</h5>
 
-        {favoriteProducts.length > 0 ? (
+        {favorites.length > 0 ? (
           <div className='table-responsive'>
             <table className='table table-borderless'>
               <thead>
@@ -34,11 +23,10 @@ export default function FavoritesList({
                 </tr>
               </thead>
               <tbody>
-                {favoriteProducts.map((item) => (
+                {favorites.map((item) => (
                   <FavoriteItem
                     key={item.id}
                     favoriteItem={item}
-                    setFavorites={setFavorites}
                   />
                 ))}
               </tbody>
@@ -50,13 +38,14 @@ export default function FavoritesList({
       </div>
       <div className='card-footer d-flex flex-column'>
         <small className='text-muted'>
-          Quantidade de produtos: {favoriteProducts.length}
+          Quantidade de produtos: {favorites.length}
         </small>
 
         <small className='text-muted'>
-          Valor total: R$ {totalFavoriteValue}
+          Valor total: R$ {totalFavoritesValue.toFixed(2)}
         </small>
       </div>
     </div>
   )
 }
+

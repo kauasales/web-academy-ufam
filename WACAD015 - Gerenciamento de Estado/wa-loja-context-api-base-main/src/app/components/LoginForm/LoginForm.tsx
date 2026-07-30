@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useAuthContext } from '@/app/context/AuthContext'
 
 type LoginFormInputs = {
   email: string
@@ -16,11 +16,12 @@ export default function LoginForm() {
     formState: { errors }
   } = useForm<LoginFormInputs>()
 
-  const router = useRouter()
+  const { login } = useAuthContext()
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = () => {
-    router.push('/')
+  const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
+    login(data.email)
   }
+
 
   return (
     <div className='col-12 col-md-8 d-flex justify-content-center align-items-center'>

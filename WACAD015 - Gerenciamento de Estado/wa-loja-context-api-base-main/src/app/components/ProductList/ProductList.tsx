@@ -4,14 +4,10 @@ import ProductCard from '../ProductCard/ProductCard'
 
 interface ProductListProps {
   products: Product[]
-  favorites: Product[]
-  setFavorites: React.Dispatch<React.SetStateAction<Product[]>>
 }
 
 export default function ProductList({
-  products,
-  favorites,
-  setFavorites
+  products
 }: ProductListProps) {
   return (
     <div className='row row-cols-1 row-cols-lg-2'>
@@ -23,16 +19,15 @@ export default function ProductList({
             <ProductCard
               key={product.id}
               product={product}
-              setFavorites={setFavorites}
-              favorites={favorites}
             />
           ))}
         </div>
       </div>
 
       <div className='col-lg-3'>
-        <FavoritesSummary favorites={favorites} setFavorites={setFavorites} />
+        <FavoritesSummary />
       </div>
     </div>
   )
 }
+

@@ -1,21 +1,18 @@
+'use client'
+
 import { calculateDiscountedPrice } from '@/app/helpers'
 import { Product } from '@/app/types/product'
+import { useFavoritesContext } from '@/app/context/FavoritesContext'
 import Image from 'next/image'
 
 interface FavoriteItemProps {
   favoriteItem: Product
-  setFavorites: React.Dispatch<React.SetStateAction<Product[]>>
 }
 
 export default function FavoriteItem({
-  favoriteItem,
-  setFavorites
+  favoriteItem
 }: FavoriteItemProps) {
-  const removeFavorite = (id: string) => {
-    setFavorites((currentFavorites) =>
-      currentFavorites.filter((item) => item.id !== id)
-    )
-  }
+  const { removeFavorite } = useFavoritesContext()
 
   return (
     <tr key={favoriteItem.id}>
@@ -54,3 +51,4 @@ export default function FavoriteItem({
     </tr>
   )
 }
+
