@@ -1,22 +1,24 @@
+'use client'
+
+import { useContext } from 'react'
 import { calculateDiscountedPrice } from '@/app/helpers'
 import { Product } from '@/app/types/product'
+import { FavoritesContext } from '@/app/context/FavoritesContext'
 import Image from 'next/image'
 
 interface ProductCardProps {
   product: Product
-  favorites: Product[]
-  setFavorites: React.Dispatch<React.SetStateAction<Product[]>>
   showImage?: boolean
   showButton?: boolean
 }
 
 export default function ProductCard({
   product,
-  favorites,
-  setFavorites,
   showImage = true,
   showButton = true
 }: ProductCardProps) {
+  const { favorites, setFavorites } = useContext(FavoritesContext)
+
   const addToFavorites = (productToAdd: Product) => {
     setFavorites((currentFavorites) => [...currentFavorites, productToAdd])
   }

@@ -1,18 +1,18 @@
+import { useContext } from 'react'
 import { Product } from '@/app/types/product'
+import { FavoritesContext } from '@/app/context/FavoritesContext'
 import FavoritesSummary from '../FavoritesSummary/FavoritesSummary'
 import ProductCard from '../ProductCard/ProductCard'
 
 interface ProductListProps {
   products: Product[]
-  favorites: Product[]
-  setFavorites: React.Dispatch<React.SetStateAction<Product[]>>
 }
 
 export default function ProductList({
-  products,
-  favorites,
-  setFavorites
+  products
 }: ProductListProps) {
+  const { favorites, setFavorites } = useContext(FavoritesContext)
+
   return (
     <div className='row row-cols-1 row-cols-lg-2'>
       <div className='col-lg-9'>
@@ -23,15 +23,13 @@ export default function ProductList({
             <ProductCard
               key={product.id}
               product={product}
-              setFavorites={setFavorites}
-              favorites={favorites}
             />
           ))}
         </div>
       </div>
 
       <div className='col-lg-3'>
-        <FavoritesSummary favorites={favorites} setFavorites={setFavorites} />
+        <FavoritesSummary />
       </div>
     </div>
   )
