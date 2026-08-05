@@ -1,0 +1,21 @@
+{
+  "name": "tests-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "web_academy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-correios": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/jest": "^30.0.0",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1"
+  }
+}
