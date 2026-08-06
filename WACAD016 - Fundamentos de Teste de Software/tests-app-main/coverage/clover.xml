@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1785975458813" clover="3.2.0">
+  <project timestamp="1785975458813" name="All files">
+    <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3" elements="21" coveredelements="21" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
+    <file name="validacoes.js" path="C:\Users\Aluno\Documents\GitHub\web-academy-ufam\WACAD016 - Fundamentos de Teste de Software\tests-app-main\src\utils\validacoes.js">
+      <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
+      <line num="8" count="2" type="stmt"/>
+      <line num="10" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="23" count="4" type="stmt"/>
+      <line num="31" count="4" type="stmt"/>
+      <line num="32" count="4" type="cond" truecount="4" falsecount="0"/>
+      <line num="33" count="1" type="stmt"/>
+      <line num="51" count="2" type="stmt"/>
+      <line num="52" count="2" type="stmt"/>
+      <line num="53" count="3" type="stmt"/>
+      <line num="55" count="2" type="stmt"/>
+      <line num="58" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

@@ -5,7 +5,7 @@
  * @returns {string} - O primeiro nome extraído do nome completo ou o próprio nome caso não haja espaços.
  */
 function firstName(fullName) {
-  const whitespace = fullName.lastIndexOf(" ");
+  const whitespace = fullName.indexOf(" ");
 
   if (whitespace === -1) return fullName;
   else return fullName.slice(0, whitespace);
@@ -29,7 +29,7 @@ function checkStockAvailability(productType, quantity) {
   };
 
   const availableStock = stock[productType];
-  if (availableStock === 0) return false;
+  if (availableStock === undefined || quantity > availableStock) return false;
   else return true;
 }
 
@@ -50,7 +50,7 @@ function checkStockAvailability(productType, quantity) {
 function calculateTotalPrice(products) {
   let total = 0;
   for (let i = 0; i < products.length; i++) {
-    total = products[i].price;
+    total += products[i].price *products[i].quantity;
   }
   return total;
 }
