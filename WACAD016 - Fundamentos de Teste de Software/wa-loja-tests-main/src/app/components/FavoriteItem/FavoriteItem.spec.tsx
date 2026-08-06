@@ -23,10 +23,14 @@ describe('FavoriteItem', () => {
       </table>
     )
 
+    const button = screen.getByRole('button', { name: /remover/i })
+
     expect(screen.getByText(product.nome)).toBeInTheDocument()
     expect(screen.getByText(product.descricao)).toBeInTheDocument()
     expect(screen.getByAltText(product.fotos[0].titulo)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /remover/i })).toBeInTheDocument()
+    expect(button).toBeInTheDocument()
+    expect(button).toHaveAccessibleName('Remover')
+    expect(button).toHaveClass('btn', 'btn-outline-danger', 'btn-sm')
   })
 
   it('calls setFavorites with the filtered list when removing an item', async () => {

@@ -9,7 +9,20 @@ jest.mock('../../hooks/useFavoritesContext', () => ({
 
 jest.mock('../ProductCard/ProductCard', () => ({
   __esModule: true,
-  default: ({ product }: { product: Product }) => <div data-testid="product-card">{product.nome}</div>
+  default: ({
+    product,
+    setFavorites
+  }: {
+    product: Product
+    setFavorites: React.Dispatch<React.SetStateAction<Product[]>>
+  }) => (
+    <div
+      data-testid="product-card"
+      data-has-set-favorites={typeof setFavorites === 'function' ? 'true' : 'false'}
+    >
+      {product.nome}
+    </div>
+  )
 }))
 
 const mockUseFavoritesContext = useFavoritesContext as jest.Mock
@@ -25,5 +38,19 @@ describe('ProductList', () => {
     expect(screen.getByText('Notebook')).toBeInTheDocument()
     expect(screen.getByText('Smartphone')).toBeInTheDocument()
     expect(screen.getByText('Câmera')).toBeInTheDocument()
+  })
+
+  it('passes the favorites setter from the context to each rendered product card', () => {
+    const setFavorites = jest.fn()
+    mockUseFavoritesContext.mockReturnValue({ setFavorites })
+
+    render(<ProductList products={mockProducts.slice(0, 2)} />)
+
+    const cards = screen.getAllByTestId('product-card')
+
+    expect(cards).toHaveLength(2)
+    cards.forEach((card) => {
+      expect(card).toHaveAttribute('data-has-set-favorites', 'true')
+    })
   })
 })

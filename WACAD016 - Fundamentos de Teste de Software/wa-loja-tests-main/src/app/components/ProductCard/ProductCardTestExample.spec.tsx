@@ -75,4 +75,20 @@ describe('ProductCard', () => {
 
     expect(setFavorites).not.toHaveBeenCalled()
   })
+
+  it('renders the favorite button in the added state when the product is already favorite', () => {
+    const useIsProductFavoriteMock = useIsProductFavorite as jest.Mock
+    useIsProductFavoriteMock.mockReturnValue(true)
+
+    render(
+      <FavoritesProvider>
+        <ProductCard product={mockProducts[0]} setFavorites={() => {}} />
+      </FavoritesProvider>
+    )
+
+    const button = screen.getByRole('button', { name: /Adicionado aos favoritos/i })
+
+    expect(button).toBeDisabled()
+    expect(button).toHaveClass('btn', 'btn-success')
+  })
 })

@@ -11,13 +11,13 @@ describe('BootstrapClient', () => {
   it('renders nothing and loads the bootstrap bundle', () => {
     const { container } = render(<BootstrapClient />)
 
-    // Verifica se o componente não renderizou nada no DOM
     expect(container).toBeEmptyDOMElement()
+    expect(container.firstChild).toBeNull()
 
-    // Valida que o módulo do Bootstrap foi carregado/executado
     const bootstrapModule = jest.requireMock(
       'bootstrap/dist/js/bootstrap.bundle.min.js'
     )
     expect(bootstrapModule).toBeDefined()
+    expect(bootstrapModule.default).toEqual({ version: '5.3.3' })
   })
 })

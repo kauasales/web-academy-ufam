@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { mockProducts } from '@/app/mocks/products'
 import FavoritesList from './FavoritesList'
 import { useFavoriteProducts } from '../../hooks/useFavoriteProducts'
@@ -43,8 +43,21 @@ describe('FavoritesList', () => {
 
     expect(screen.getByText('Lista de favoritos:')).toBeInTheDocument()
     expect(screen.getByText('Sua lista de favoritos está vazia.')).toBeInTheDocument()
+    expect(screen.queryByRole('table')).not.toBeInTheDocument()
     expect(screen.getByText('Quantidade de produtos: 0')).toBeInTheDocument()
     expect(screen.getByText('Valor total: R$ 0.00')).toBeInTheDocument()
+  })
+
+  it('renders a fallback message and no table when the list is empty even if totals are provided', () => {
+    mockUseFavoriteProducts.mockReturnValue([])
+    mockUseFavoritesTotalValue.mockReturnValue('125.50')
+
+    render(<FavoritesList />)
+
+    expect(screen.getByText('Sua lista de favoritos está vazia.')).toBeInTheDocument()
+    expect(screen.queryByRole('table')).not.toBeInTheDocument()
+    expect(screen.getByText('Quantidade de produtos: 0')).toBeInTheDocument()
+    expect(screen.getByText('Valor total: R$ 125.50')).toBeInTheDocument()
   })
 
   it('renders the favorites table when there are favorites', () => {
@@ -53,13 +66,37 @@ describe('FavoritesList', () => {
 
     render(<FavoritesList />)
 
-    expect(screen.getByRole('table')).toBeInTheDocument()
-    expect(screen.getByText('Produto')).toBeInTheDocument()
-    expect(screen.getByText('Preço')).toBeInTheDocument()
-    expect(screen.getByText('Desconto')).toBeInTheDocument()
-    expect(screen.getByText('Opções')).toBeInTheDocument()
+    const table = screen.getByRole('table')
+    expect(table).toBeInTheDocument()
+    expect(within(table).getByText('Produto')).toBeInTheDocument()
+    expect(within(table).getByText('Preço')).toBeInTheDocument()
+    expect(within(table).getByText('Desconto')).toBeInTheDocument()
+    expect(within(table).getByText('Opções')).toBeInTheDocument()
     expect(screen.getAllByTestId('favorite-item')).toHaveLength(2)
     expect(screen.getByText('Quantidade de produtos: 2')).toBeInTheDocument()
     expect(screen.getByText('Valor total: R$ 100.00')).toBeInTheDocument()
+  })
+
+  it('renders the correct item count and total value for different favorite inputs', () => {
+    mockUseFavoriteProducts.mockReturnValue(mockProducts.slice(0, 3))
+    mockUseFavoritesTotalValue.mockReturnValue('3200.00')
+
+    render(<FavoritesList />)
+
+    expect(screen.getAllByTestId('favorite-item')).toHaveLength(3)
+    expect(screen.getByText('Quantidade de produtos: 3')).toBeInTheDocument()
+    expect(screen.getByText('Valor total: R$ 3200.00')).toBeInTheDocument()
+  })
+
+  it('renders the correct totals for a larger list with multiple items and different values', () => {
+    const multipleFavorites = mockProducts.slice(0, 4)
+    mockUseFavoriteProducts.mockReturnValue(multipleFavorites)
+    mockUseFavoritesTotalValue.mockReturnValue('4899.00')
+
+    render(<FavoritesList />)
+
+    expect(screen.getAllByTestId('favorite-item')).toHaveLength(4)
+    expect(screen.getByText('Quantidade de produtos: 4')).toBeInTheDocument()
+    expect(screen.getByText('Valor total: R$ 4899.00')).toBeInTheDocument()
   })
 })
